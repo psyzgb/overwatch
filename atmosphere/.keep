@@ -1,1 +1,73 @@
-placeholder
+README.md (inside /atmosphere)
+Atmosphere — Independent Audit Universe
+
+Atmosphere is a parallel, independent audit layer that exists outside the ROOT system.
+It does not participate in operational processes — it only observes, withdraws the status and saves the results in its own, isolated archive.
+
+ROOT cannot write to Atmosphere.
+Atmosphere cannot write to ROOT.
+The link is one-way: read‑only simlink.
+🌫️ What Atmosphere does
+
+Atmosphere periodically wakes up (cron) and executes: 
+
+read‑only log‑pull from ROOT 
+
+SnapshotOps — capturing the current state 
+
+IntegrityOps — structural and stability check 
+
+DiffOps — a comparison with the previous state 
+
+TimelineOps — tracking system evolution 
+
+AnomalyOps — detection of unusual changes 
+
+log‑drop — saving the results to your own archive
+
+Atmosphere is a passive surveillance universe.
+ROOT is just a data source.
+🜁 Why it exists
+
+The goal of the Atmosphere layer is to:
+
+create a truth layer outside the operating system
+
+provide objective auditing
+
+have an independent archive that cannot be modified by ROOT
+
+detect anomalies and unexpected changes
+
+provide a security audit that is indestructible from the ROOT perspective
+
+
+
+Architecture
+
+
+ATMOSPHERE
+ ├── CronWake
+ ├── PullOps
+ ├── RevisionLayer
+ │     ├── SnapshotOps
+ │     ├── IntegrityOps
+ │     ├── DiffOps
+ │     ├── TimelineOps
+ │     └── AnomalyOps
+ └── AuditArchive
+       ├── log-drop
+       ├── snapshots
+       ├── diffs
+       ├── timeline
+       └── anomalies
+
+
+Root
+
+ROOT
+ └── audit-symlink → ATMOSPHERE/AuditArchive
+
+Status
+
+v0.1.0 — Atmosphere skeleton
